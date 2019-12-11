@@ -1,4 +1,4 @@
 
 *.xml
-AOC.iml
+*.iml
 out/production/AOC/Day2.class
