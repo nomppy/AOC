@@ -51,20 +51,18 @@ public class Day3 {
                 }
             }
         }
+
+        int min = Integer.MAX_VALUE;
+        intersections.remove(0);
         System.out.println(intersections);
-
-        int min = 0;
         for(Position p : intersections){
-            min = Math.min(min, manhattanDistance(p));
+            min = Math.min(min, Math.abs(p.x) + Math.abs(p.y));
         }
+        System.out.println(min);
 
 
     }
 
-
-    public static int manhattanDistance(Position pos){
-        return pos.x + pos.y;
-    }
 
     public static class Position {
         private int x, y;
