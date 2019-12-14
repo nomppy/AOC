@@ -1,54 +1,70 @@
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Day3 {
     public static void main(String[] args) throws IOException {
-        Scanner in = new Scanner(new FileReader("data3.txt"));
+        Scanner in = new Scanner(new FileReader("data3full.txt"));
+
         String[] line1 = in.next().split(",");
         String[] line2 = in.next().split(",");
         in.close();
 
-        Character[] dir1 = new Character[line1.length];
-        Integer[] dis1= new Integer[line1.length];
-        Character[] dir2 = new Character[line2.length];
-        Integer[] dis2= new Integer[line1.length];
+        int dis1;
+        char dir1;
+        int dis2;
+        char dir2;
 
+        ArrayList<Position> tracker1 = new ArrayList<>();
+        ArrayList<Position> tracker2= new ArrayList<>();
+        tracker1.add(new Position());
+        tracker2.add(new Position());
 
-        Position[] tracker1 = new Position[line1.length + 1];
-        tracker1[0] = new Position();
-        for (int i = 0; i < line1.length; i++){
-            dir1[i] = line1[i].charAt(0);
-            dis1[i] = Integer.parseInt(line1[i].substring(1));
-            tracker1[i + 1] = Position.move(tracker1[i], dir1[i], dis1[i]);
-            System.out.print(tracker1[i].toString() + " ");
+        for (String s : line1) {
+            dir1 = s.charAt(0);
+            dis1 = Integer.parseInt(s.substring(1));
+            for (int j = 0; j < dis1; j++) {
+                tracker1.add(Position.move(tracker1.get(tracker1.size() - 1), dir1, 1));
+//                System.out.print(tracker1.get(tracker1.size() - 1).toString() + " ");
+            }
         }
 
-        Position[] tracker2 = new Position[line2.length + 1];
-        tracker2[0] = new Position();
+        for (String s : line2) {
+//            System.out.println();
+            dir2 = s.charAt(0);
+            dis2 = Integer.parseInt(s.substring(1));
+            for (int j = 0; j < dis2; j++) {
+                tracker2.add(Position.move(tracker2.get(tracker2.size() - 1), dir2, 1));
+//                System.out.print(tracker2.get(tracker2.size() - 1).toString() + " ");
+            }
+//            System.out.println();
+        }
+
         System.out.println();
-        for (int i = 0; i < line2.length; i++){
-            dir2[i] = line2[i].charAt(0);
-            dis2[i] = Integer.parseInt(line2[i].substring(1));
-            tracker2[i + 1] = Position.move(tracker2[i], dir2[i], dis2[i]);
-            System.out.print(tracker2[i].toString() + " ");
-        }
 
         ArrayList<Position> intersections = new ArrayList<Position>();
-        for (int i = 0; i < tracker1.length; i++) {
-            if (tracker1[i].equals(tracker2[i])){
-                intersections.add(tracker1[i]);
+        for (Position value : tracker1) {
+            for (Position position : tracker2) {
+                if (value.equals(position)) {
+                    intersections.add(value);
+                }
             }
         }
         System.out.println(intersections);
 
+        int min = 0;
+        for(Position p : intersections){
+            min = Math.min(min, manhattanDistance(p));
+        }
 
 
     }
 
+
+    public static int manhattanDistance(Position pos){
+        return pos.x + pos.y;
+    }
 
     public static class Position {
         private int x, y;
@@ -72,16 +88,19 @@ public class Day3 {
                     break;
                 case 'R':
                     x += distance;
+                    break;
                 case 'U':
                     y += distance;
+                    break;
                 case 'D':
                     y -= distance;
+                    break;
             }
             return new Position(x, y);
         }
 
-        public boolean equals(Position pos1, Position pos2) {
-            return pos1.x == pos2.x && pos1.y == pos2.y;
+        public boolean equals(Position pos) {
+            return this.x == pos.x && this.y == pos.y;
         }
 
         public String toString() {
