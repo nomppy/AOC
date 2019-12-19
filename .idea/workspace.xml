@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="281af794-7651-4ac7-9bc7-923c6c2bb0b4" name="Default Changelist" comment="Day 3 part 1... sorta completed? This very slow though">
+    <list default="true" id="281af794-7651-4ac7-9bc7-923c6c2bb0b4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AOC.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AOC.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data3.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Day3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Day3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576287818811</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="almost.... thanks to arjvik for letting me *borrow* inspiration from his code">
+      <created>1576636875697</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1576636875697</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -140,41 +145,42 @@
     <MESSAGE value="Day 3&#10;TODO: not have it only detect intersections where the wires are changing directions lmao&#10;&#10;should be easy fix" />
     <MESSAGE value="Day 3 part 1... sorta completed? This very slow though" />
     <MESSAGE value="Fixed minor (huge) logic error" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed minor (huge) logic error" />
+    <MESSAGE value="almost.... thanks to arjvik for letting me *borrow* inspiration from his code" />
+    <option name="LAST_COMMIT_MESSAGE" value="almost.... thanks to arjvik for letting me *borrow* inspiration from his code" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="614" y="133" key="CommitChangelistDialog2" timestamp="1576287936244">
+    <state x="614" y="133" key="CommitChangelistDialog2" timestamp="1576636874954">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="614" y="133" key="CommitChangelistDialog2/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576287936244" />
+    <state x="614" y="133" key="CommitChangelistDialog2/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576636874954" />
     <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1576423695944">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="740" y="294" key="FileChooserDialogImpl/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576423695944" />
-    <state width="1877" height="295" key="GridCell.Tab.0.bottom" timestamp="1576636271804">
+    <state width="1877" height="295" key="GridCell.Tab.0.bottom" timestamp="1576721573532">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576636271804" />
-    <state width="1877" height="295" key="GridCell.Tab.0.center" timestamp="1576636271804">
+    <state width="1877" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576721573532" />
+    <state width="1877" height="295" key="GridCell.Tab.0.center" timestamp="1576721573532">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="295" key="GridCell.Tab.0.center/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576636271804" />
-    <state width="1877" height="295" key="GridCell.Tab.0.left" timestamp="1576636271804">
+    <state width="1877" height="295" key="GridCell.Tab.0.center/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576721573532" />
+    <state width="1877" height="295" key="GridCell.Tab.0.left" timestamp="1576721573531">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="295" key="GridCell.Tab.0.left/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576636271804" />
-    <state width="1877" height="295" key="GridCell.Tab.0.right" timestamp="1576636271804">
+    <state width="1877" height="295" key="GridCell.Tab.0.left/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576721573531" />
+    <state width="1877" height="295" key="GridCell.Tab.0.right" timestamp="1576721573532">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="295" key="GridCell.Tab.0.right/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576636271804" />
-    <state x="552" y="272" key="Vcs.Push.Dialog.v2" timestamp="1576287820320">
+    <state width="1877" height="295" key="GridCell.Tab.0.right/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576721573532" />
+    <state x="552" y="272" key="Vcs.Push.Dialog.v2" timestamp="1576636877520">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="552" y="272" key="Vcs.Push.Dialog.v2/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576287820320" />
-    <state x="656" y="362" key="com.intellij.ide.util.TipDialog" timestamp="1576423627704">
+    <state x="552" y="272" key="Vcs.Push.Dialog.v2/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576636877520" />
+    <state x="656" y="362" key="com.intellij.ide.util.TipDialog" timestamp="1576713943668">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="656" y="362" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576423627704" />
+    <state x="656" y="362" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576713943668" />
     <state x="769" y="456" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576284538953">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
