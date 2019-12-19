@@ -5,17 +5,20 @@ public class Day4 {
         boolean repeats = false;
 
 
-        for (int i = 0; i < pwd.length() - 1 && increasing; i++) {
+        for (int i = 0; i < pwd.length() - 1
+                && increasing; i++) {
             increasing = (int)pwd.charAt(i) <= (int)pwd.charAt(i + 1);
-            rep = pwd.charAt(i) == pwd.charAt(i + 1); // if current char is the same as next char
-            if(rep){
-                for (int j = i + 1; j < pwd.length() - 1; j++) { // if next char is equal to the char after it
-                    rep = pwd.charAt(j) != pwd.charAt(j + 1);
-                    // if they happen to be equal than this series of repeating numbers is invalid
-                }
-            }
-            repeats = repeats || rep; // once repeats is true, it cannot be switched to false
         }
+
+        pwd = " " + pwd + " ";
+        for (int i = 1; i < pwd.length() - 2; i ++) {
+            rep = pwd.charAt(i) == pwd.charAt(i + 1);
+            if (rep) {
+                rep = pwd.charAt(i - 1) != pwd.charAt(i) && pwd.charAt(i) != pwd.charAt(i + 2);
+            }
+            repeats = repeats || rep;
+        }
+
         return increasing && repeats;
     }
 
