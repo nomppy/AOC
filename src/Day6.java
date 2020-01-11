@@ -1,141 +1,161 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
-public class Day6 {
-    static ArrayList<Node> forest = new ArrayList<>();
+
+class Day6 {
+
+    static Map<String, Node> tree = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
-
-        /*
-        TODO
-        NOTHING MUCH JUST CHANGE THE ENTIRE FUCKING STRUCTURE OF THE CODE
-        ITS NOTHING, REALLY, ALL I GOTTA DO IS, UH, TURN FOREST INTO A WHOLE FUCKING MAP, AYE?
-        NOT MUCH WORK AT ALL, AND DEFINITELY THE MOST FUCKING EFFICIENT WAY OF DOING IT, AYE?
-        CODING WAS EASY, THEY SAID
-        JUST KIDDING NOBODY FUCKING SAID THAT
-        */
         Scanner aoc = new Scanner(new BufferedReader(new FileReader("data6.txt")));
         Scanner test = new Scanner(new BufferedReader(new FileReader("test.txt"))); // for testing with small inputs
 
-        forest.add(new Node("COM"));
-        while(test.hasNextLine()){
-            String orbit = test.nextLine();
-            forest.add(new Node(orbit.split("\\)")[1], orbit.split("\\)")[0]));
-        }
-        System.out.println(forest);
+        tree.put("COM", new Node("COM", 0));
+        while(aoc.hasNextLine()) {
+            String orbit = aoc.nextLine();
+            String child = orbit.split("\\)")[1];
+            String parent = orbit.split("\\)")[0];
 
-
-
-        Map<String, Node> tree = new HashMap<>();
-
-
-        for (int i = 0; i < forest.size(); i ++){
-//            if (forest.get(i).getParent().getName().equals("COM"))
-            for (int j = 0; j < forest.size(); j ++){
-                if (forest.get(i).getParent().equals(forest.get(j))) {
-                    // j is parent, i is child
-                    Node parent = forest.get(j);
-                    Node child = forest.get(i);
-                    parent.addChild(child.getName());
-                    tree.put(parent.getName(), parent);
-                    tree.put(child.getName(), child);
-                    j = forest.size();
-                }
+            Node c = null;
+            Node p = null;
+            if (tree.get(child) != null && tree.get(parent) == null){
+                // if child is already in tree but parent isn't
+                c = tree.get(child);
+                p = new Node(parent, c.getHeight() - 1);
+                c.setParent(p);
+                p.addChild(c);
+            }else if (tree.get(child) == null && tree.get(parent) != null){
+                // if parent is already in tree but child isn't
+                p = tree.get(parent);
+                c = new Node(child, p);
+                p.addChild(c);
+            }else if (tree.get(child) != null && tree.get(parent) != null){
+                // both child and parent are in tree
+                p = tree.get(parent);
+                c = tree.get(child);
+                p.addChild(c);
+                c.setParent(p);
+            }else{
+                // neither are in tree
+                p = new Node(parent, 0);
+                c = new Node(child, p);
+                p.addChild(c);
             }
+            tree.put(child, c);
+            tree.put(parent, p);
+//            try{ // if either child or parent is already in tree
+//                try{ // if child is already in tree
+//                    c = tree.get(child);
+//                    p = tree.get(parent);
+//                } catch (Exception NullPointerException) { // if parent is already in tree
+//                    p = tree.get(parent);
+//                    c = new Node(child, p);
+//                }
+//                c.setParent(p);
+//                tree.put(child, c);
+//            }catch (Exception NullPointerException){ // if not
+//                Node p = new Node(parent, 0);
+//                c = new Node(child, p);
+//                tree.put(child, c);
+//                tree.put(parent, p);
+//            }
+            p.updateChildren();
         }
+
         System.out.println(tree);
 
         int orbits = 0;
-
-        for (Node i : tree.values()) {
-            for (Node j : tree.values()) {
-                if (i.hasAncestor(j)) orbits++;
+        for (Node a : tree.values()){
+            for (Node o : tree.values()){
+                if (hasAncestor(o, a)) orbits ++;
             }
         }
-
-        System.out.println("Direct orbits: " + (tree.size()));
-        System.out.println("Indirect orbits: " + (orbits - tree.size()));
-        System.out.println("Total orbits: " + (orbits));
+        System.out.println(orbits);
     }
 
-    static class Node {
-
-        private int height;
-        private String name;
-        private String parent;
-        private ArrayList<String> children = new ArrayList<>();
-
-        public Node(String name, String parent, int height){
-            this.name = name;
-            this.height = height;
-            this.parent = parent;
+    static boolean hasAncestor(Node offspring, Node ancestor){
+        Node next = offspring.getParent();
+        for (int i = 0; i < offspring.getHeight() - ancestor.getHeight(); i++) {
+            if (next.getName().equals(ancestor.getName())) return true;
+            next = next.getParent();
         }
+        return false;
+    }
 
-        public Node(String name){
-            this.name = name;
-            height = 1;
-            parent = new Node("null", 0, null);
-            if (name.equals("COM")){
-                height = 0;
-            }
-//            for (Node node : forest) {
-//                if (node.getName().equals(name)) {
-//                    height = node.getHeight();
-//                    parent = node.getParent();
-//                }
-//            }
-        }
+    static boolean hasAncestor(String offspring, String ancestor){
+        Node os = tree.get(offspring);
+        Node a = tree.get(ancestor);
+        return(hasAncestor(os, a));
+    }
+}
 
-        public String getParent(){
-            return parent;
-        }
+class Node{
 
-        public String getName(){
-            return name;
-        }
+    // there's a very big oopsie with this class in that the COM node actually contains the entire tree...
+    private String name;
+    private int height;
+    private Node parent;
+    private ArrayList<Node> children = new ArrayList<Node>();
 
-        public int getHeight(){
-            return height;
-        }
+    // constructor
 
-        public ArrayList<String> getChildren(){
-            return this.children;
-        }
+    public Node(String name, Node parent){
+        this.name = name;
+        this.parent = parent;
+    }
 
-        public String toString(){
-            return "Name: " + name + " Height: " + height + " Parent: " + parent;
-        }
+    public Node(String name, int height){
+        this.name = name;
+        this.parent = null;
+        this.height = height;
+    }
 
-        public void setName(String name){
-            this.name = name;
+    public void updateChildren(){
+        for (Node n : children){
+            n.update();
+            n.updateChildren();
         }
+    }
 
-        public void setParent(String parent) {
-            this.parent = parent;
-        }
+    public void addChild(Node child){
+        children.add(child);
+    }
 
-        public void addChild(String child){
-//            Node newNode = new Node(child, this.getHeight() + 1, this);
-            this.children.add(child);
-        }
+    public void update(){
+        height = parent.getHeight() + 1;
+    }
 
-        public boolean equals(Node node) {
-            return this.getName().equals(node.getName());
-        }
+    public String toString(){
+        try {
+            return "Name: " + name + "  Height: " + height + "  Parent: " + parent.getName();
+        }catch (Exception NullPointerException){
+            return "Name: " + name + "  Height: " + height + "  Parent: " + "None";        }
+    }
 
-        public boolean isChildOf(Node parent){
-            return this.getParent().equals(parent.getName());
-        }
 
-        public boolean hasAncestor(Node ancestor){
-            Node node = this;
-            for (int i = 0; i < this.getHeight() - ancestor.getHeight(); i++) {
-                node = node.getParent();
-                if (node.equals(ancestor)){
-                    return true;
-                }
-            }
-            return false;
-        }
+    // getters and setters
+
+    public String getName(){
+        return name;
+    }
+
+    public Node getParent(){
+        return parent;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setParent(Node parent){
+        this.parent = parent;
+    }
+
+    public void setHeight(int height){
+        this.height = height;
     }
 }

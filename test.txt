@@ -1,4 +1,7 @@
+G)F
 A)B
 COM)A
-B)C
-C)D
+E)G
+A)C
+B)D
+D)E
