@@ -16,8 +16,8 @@ class Day6 {
             String child = orbit.split("\\)")[1];
             String parent = orbit.split("\\)")[0];
 
-            Node c = null;
-            Node p = null;
+            Node c;
+            Node p;
             if (tree.get(child) != null && tree.get(parent) == null){
                 // if child is already in tree but parent isn't
                 c = tree.get(child);
@@ -82,11 +82,6 @@ class Day6 {
         return false;
     }
 
-    static boolean hasAncestor(String offspring, String ancestor){
-        Node os = tree.get(offspring);
-        Node a = tree.get(ancestor);
-        return(hasAncestor(os, a));
-    }
 }
 
 class Node{

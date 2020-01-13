@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="281af794-7651-4ac7-9bc7-923c6c2bb0b4" name="Default Changelist" comment="Intcode computer is broken beyond belief">
-      <change afterPath="$PROJECT_DIR$/data6.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Day6.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Day5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Day5.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IntcodeComp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IntcodeComp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Day6_new.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Day6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Day6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Day6_old.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +38,18 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.Day6">
     <configuration name="Day2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -87,18 +96,6 @@
         <item itemvalue="Application.Day2" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -284,21 +281,5 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/-1920.0.1920.1080@0.0.1920.1080" timestamp="1576724801303" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Day6.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Day6.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
