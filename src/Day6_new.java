@@ -6,33 +6,80 @@ class Day6_new {
     }
 }
 
-class TreeNode{
+class Root {
+    private static int size = 0;
     private String name = "COM";
     private int height = 0;
-    private ArrayList<TreeNode> children = new ArrayList<>();
-    private TreeNode parent;
+    private ArrayList<Root> children = new ArrayList<>();
+    private Root parent;
 
     // constructor
 
-    public TreeNode(String name, TreeNode parent){
+    public Root(Root node){
+        this.name = node.getName();
+        this.height = node.getHeight();
+        this.children = node.getChildren();
+        this.parent = node.getParent();
+    }
+    public Root(String name, Root parent){
         this.name = name;
         this.parent = parent;
+        size ++;
     }
 
-    public TreeNode(String name, int height){
+    public Root(String name, int height){
         this.name = name;
         this.parent = null;
         this.height = height;
+        size = Math.max(size, height);
+    }
+
+    public int size(){
+        return size;
+    }
+
+    public static void setSize(int size){
+        Root.size = size;
+    }
+
+    public Root get(String name){
+        // searches the entire tree for the desired node under this subtree
+
+        if (name.equals(this.getName())) return this;
+        ArrayList<Root> next = this.getChildren();
+        for (int i = 0; i < size; i ++){
+
+        }
+        System.out.println("Could not find node " + name);
+        return null;
+    }
+
+    public ArrayList<Root> getLayer(int layer){
+        if (layer > size) System.out.println("Invalid layer number.");
+
+        ArrayList<Root> nodes = new ArrayList<>();
+        nodes.add(this);
+        for (int i = 0; i < layer; i ++){
+            for (int j = 0; j < nodes.size(); j ++){
+                nodes.addAll(nodes.get(j).getChildren());
+                nodes.remove(nodes.get(j));
+            }
+        }
+        return nodes;
+    }
+
+    public ArrayList<Root> getChildren(){
+        return children;
     }
 
     public void updateChildren(){
-        for (TreeNode n : children){
+        for (Root n : children){
             n.update();
             n.updateChildren();
         }
     }
 
-    public void addChild(TreeNode child){
+    public void addChild(Root child){
         children.add(child);
     }
 
@@ -54,7 +101,7 @@ class TreeNode{
         return name;
     }
 
-    public TreeNode getParent(){
+    public Root getParent(){
         return parent;
     }
 
@@ -66,7 +113,7 @@ class TreeNode{
         this.name = name;
     }
 
-    public void setParent(TreeNode parent){
+    public void setParent(Root parent){
         this.parent = parent;
     }
 
