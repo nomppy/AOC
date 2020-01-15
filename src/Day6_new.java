@@ -46,16 +46,22 @@ class Root {
         // searches the entire tree for the desired node under this subtree
 
         if (name.equals(this.getName())) return this;
-        ArrayList<Root> next = this.getChildren();
-        for (int i = 0; i < size; i ++){
-
+        ArrayList<Root> next;
+        for (int i = this.getHeight() + 1; i < size; i ++){
+            next = this.getLayer(i);
+            for (Root n : next) {
+                if (n.getName() == name) {
+                    return n;
+                }
+            }
         }
         System.out.println("Could not find node " + name);
         return null;
     }
 
-    public ArrayList<Root> getLayer(int layer){
-        if (layer > size) System.out.println("Invalid layer number.");
+    private ArrayList<Root> getLayer(int layer){
+        // returns an ArrayList<Root> indexed with this at 0
+        if (layer > size || layer <= this.getHeight()) System.out.println("Invalid layer number.");
 
         ArrayList<Root> nodes = new ArrayList<>();
         nodes.add(this);
