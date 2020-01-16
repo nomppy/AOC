@@ -1,7 +1,7 @@
-COM)A
-A)C
-A)B
 B)D
+COM)A
+A)B
+A)C
 D)E
 E)G
 G)F

@@ -3,12 +3,14 @@ import java.io.*;
 
 class Day6_new {
     public static void main(String[] args) throws IOException{
+        double s = System.currentTimeMillis();
         Scanner aoc = new Scanner(new BufferedReader(new FileReader("data6.txt")));
         Scanner test = new Scanner(new BufferedReader(new FileReader("test.txt")));
 
         Root root = new Root();
-        while(test.hasNextLine()){
-            String orbit = test.nextLine();
+        while(aoc.hasNextLine()){
+            // could also start at an arbitrary spot and traverse both ways and expand to the whole tree
+            String orbit = aoc.nextLine();
             String child = orbit.split("\\)")[1];
             String parent = orbit.split("\\)")[0];
 
@@ -16,9 +18,11 @@ class Day6_new {
             Root p = root.get(parent);
 
             if (c == null && p == null){ // neither child nor parent are in tree
-                new Root(parent, 0).addChild(child);
+                root.addChild(parent);
+                root.get(parent).addChild(child);
             }else if (c != null && p == null){ // child is in tree but parent is not
-                new Root(parent, c.getHeight() - 1).addChild(c);
+                root.addChild(new Root(parent, c.getHeight() - 1));
+                root.get(parent).addChild(c);
             }else if(root.get(child) == null && root.get(parent) != null){ // parent is in tree but child is not
                 p.addChild(child);
             }else if(root.get(child) != null && root.get(parent) != null){ // both are in tree
@@ -27,6 +31,10 @@ class Day6_new {
             root.updateAll();
         }
         System.out.println(root.subtree());
+        System.out.println(root.info());
+        double e = System.currentTimeMillis();
+        System.out.println("Completed in " + (e - s) + "ms");
+//        Root.display(root);
     }
 }
 
@@ -67,12 +75,27 @@ class Root {
         return size;
     }
 
-    public static void setSize(int size){
-        Root.size = size;
+    public static void display(Root root){
+        // prints the tree in a human-readable format
+
+        System.out.println("+--" + root.getName());
+        int indents = 0;
+        for (int i = root.getHeight() + 1; i < root.size(); i++){
+            indents ++;
+            ArrayList<Root> layer = root.getLayer(i);
+            for (Root value : layer) {
+                System.out.print("|");
+                for (int k = 0; k < indents; k++) {
+                    System.out.print("  ");
+                }
+                System.out.print("+--" + value.getName() + "\n");
+            }
+        }
     }
 
     public Root get(String name){
-        // searches the entire tree for the desired node under this subtree
+        // searches the subtree for the desired node
+        // root.get() searches the entire tree
 
         if (name.equals(this.getName())) return this;
         ArrayList<Root> next;
@@ -85,10 +108,6 @@ class Root {
             }
         }
         return null;
-    }
-
-    public ArrayList<Root> nextLayer(){
-        return this.getLayer(this.getHeight() + 1);
     }
 
     public ArrayList<Root> getLayer(int layer){
@@ -129,8 +148,16 @@ class Root {
         children.add(new Root(name, this));
     }
 
+    private void removeChild(Root child){
+        children.remove(child);
+    }
+
     public void addChild(Root child){
         children.add(child);
+        Root old = child.getParent();
+        if (old != null && old.getChildren().indexOf(child) != -1){
+            old.removeChild(child);
+        }
         child.setParent(this);
     }
 
@@ -138,14 +165,16 @@ class Root {
         height = parent.getHeight() + 1;
     }
 
-
-
     public ArrayList<Root> subtree(){
         ArrayList<Root> tree = new ArrayList<>();
         for (int i = 0; i < size; i ++){
             tree.addAll(this.getLayer(i));
         }
         return tree;
+    }
+
+    public String info(){
+        return "Sub-layers: " + size + "\nSub-nodes: " + this.subtree().size();
     }
 
     public String toString(){

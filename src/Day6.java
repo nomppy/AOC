@@ -7,6 +7,7 @@ class Day6 {
     static Map<String, Node> tree = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
+        double startTime = System.currentTimeMillis();
         Scanner aoc = new Scanner(new BufferedReader(new FileReader("data6.txt")));
         Scanner test = new Scanner(new BufferedReader(new FileReader("test.txt"))); // for testing with small inputs
 
@@ -43,25 +44,10 @@ class Day6 {
             }
             tree.put(child, c);
             tree.put(parent, p);
-//            try{ // if either child or parent is already in tree
-//                try{ // if child is already in tree
-//                    c = tree.get(child);
-//                    p = tree.get(parent);
-//                } catch (Exception NullPointerException) { // if parent is already in tree
-//                    p = tree.get(parent);
-//                    c = new Node(child, p);
-//                }
-//                c.setParent(p);
-//                tree.put(child, c);
-//            }catch (Exception NullPointerException){ // if not
-//                Node p = new Node(parent, 0);
-//                c = new Node(child, p);
-//                tree.put(child, c);
-//                tree.put(parent, p);
-//            }
             p.updateChildren();
         }
 
+        Node root = tree.get("COM");
         System.out.println(tree);
 
         int orbits = 0;
@@ -71,6 +57,8 @@ class Day6 {
             }
         }
         System.out.println(orbits);
+        double endTime = System.currentTimeMillis();
+        System.out.println("Time: " + (endTime - startTime) + "ms");
     }
 
     static boolean hasAncestor(Node offspring, Node ancestor){
