@@ -56,9 +56,43 @@ class Day6 {
                 if (hasAncestor(o, a)) orbits ++;
             }
         }
-        System.out.println(orbits);
+        System.out.println("Part 1: " + orbits);
+
+        String target = "SAN";
+        System.out.println("Part 2: " + calDis(tree.get("YOU"), tree.get("SAN")));
+
         double endTime = System.currentTimeMillis();
         System.out.println("Time: " + (endTime - startTime) + "ms");
+    }
+
+    static int calDis(Node a, Node b){
+        // find first shared ancestor
+
+        List<Node> aParents = new ArrayList<Node>();
+        List<Node> bParents = new ArrayList<Node>();
+        
+        Node curr = a.getParent();
+        for (int i = a.getHeight(); i > 0; i --){
+            aParents.add(curr);
+            curr = curr.getParent();
+        }
+
+        curr = b.getParent();
+        for (int i = b.getHeight(); i > 0; i --){
+            bParents.add(curr);
+            curr = curr.getParent();
+        }
+
+        List<Node> sharedParents = new ArrayList<Node>();
+        for (Node n : aParents){
+            if (bParents.contains(n)){
+                sharedParents.add(n);
+            }
+        }
+
+        Node common = sharedParents.get(0);
+        System.out.println("Common: " + common);
+        return (a.getHeight() - common.getHeight() + b.getHeight() - common.getHeight() - 2);
     }
 
     static boolean hasAncestor(Node offspring, Node ancestor){
